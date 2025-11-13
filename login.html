@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Login • OmniCortex</title>
+  <meta name="description" content="Acesso ao sistema OmniCortex.">
+  <style>
+    :root{
+      --bg:#f6fbff;
+      --card:#ffffff;
+      --primary:#0a8fb3;
+      --accent:#6bd4d8;
+      --muted:#6b7280;
+      --radius:16px;
+      --shadow:0 8px 30px rgba(8,20,30,0.08);
+      --ff-sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:var(--ff-sans);
+      background:linear-gradient(180deg,var(--bg),#eaf6fb 60%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+      padding:20px;
+    }
+    .login-box{
+      background:var(--card);
+      box-shadow:var(--shadow);
+      border-radius:var(--radius);
+      max-width:400px;
+      width:100%;
+      padding:32px;
+      text-align:center;
+    }
+    .logo{
+      width:70px;height:70px;
+      margin:0 auto 12px;
+      border-radius:14px;
+      overflow:hidden;
+      background:linear-gradient(135deg,var(--primary),var(--accent));
+      display:grid;place-items:center;
+      box-shadow:0 4px 20px rgba(10,143,179,0.15);
+    }
+    .logo img{width:100%;height:100%;object-fit:cover;border-radius:14px}
+    h1{margin:6px 0 4px;font-size:20px}
+    p{color:var(--muted);margin-bottom:22px}
+    form{display:flex;flex-direction:column;gap:12px;text-align:left}
+    label{font-size:14px;color:var(--muted)}
+    input, select{
+      width:100%;
+      padding:10px;
+      border:1px solid #e6eef3;
+      border-radius:8px;
+      font-size:15px;
+    }
+    button{
+      padding:12px;
+      background:var(--primary);
+      color:#fff;
+      border:0;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:700;
+      transition:background .25s;
+      margin-top:10px;
+    }
+    button:hover{background:#087a99}
+    a{color:var(--primary);font-size:14px;text-decoration:none}
+    a:hover{text-decoration:underline}
+    footer{text-align:center;margin-top:16px;color:var(--muted);font-size:13px}
+    @media(max-width:500px){
+      .login-box{padding:24px}
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <div class="logo">
+      <img src="omni.jpeg" alt="Logo OmniCortex">
+    </div>
+    <h1>OmniCortex</h1>
+    <p>Área restrita do sistema</p>
+
+    <form onsubmit="return entrar()">
+      <label for="usuario">Usuário</label>
+      <input type="text" id="usuario" placeholder="Digite seu usuário" required>
+
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" placeholder="Digite sua senha" required>
+
+      <label for="perfil">Perfil</label>
+      <select id="perfil">
+        <option value="admin">Administrador</option>
+        <option value="profissional">Profissional</option>
+      </select>
+
+      <button type="submit">Entrar</button>
+    </form>
+
+    <footer>© 2025 OmniCortex</footer>
+  </div>
+
+  <script>
+    function entrar(){
+      const user = document.getElementById('usuario').value.trim();
+      const senha = document.getElementById('senha').value.trim();
+
+      if(user === "" || senha === ""){
+        alert("Por favor, preencha todos os campos!");
+        return false;
+      }
+
+      // Simulação simples de login
+      if(user.toLowerCase() === "admin" && senha === "123"){
+        alert("Login realizado com sucesso!");
+        window.location.href = "dashboard.html";
+        return false;
+      } else if(user.toLowerCase() === "profissional" && senha === "123"){
+        alert("Login realizado com sucesso!");
+        window.location.href = "dashboard.html";
+        return false;
+      } else {
+        alert("Usuário ou senha incorretos!");
+        return false;
+      }
+    }
+  </script>
+</body>
+</html>

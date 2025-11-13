@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Notificações • OmniCortex</title>
+<style>
+:root{
+  --bg:#f6fbff;--card:#ffffff;--primary:#0a8fb3;--accent:#6bd4d8;
+  --muted:#6b7280;--radius:14px;--shadow:0 8px 30px rgba(8,20,30,0.08);
+  --ff-sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--ff-sans);
+  background:linear-gradient(180deg,var(--bg),#eaf6fb 60%);
+  color:#0f1724;
+  display:flex;
+  min-height:100vh;
+}
+.sidebar{
+  width:240px;background:var(--primary);color:white;
+  display:flex;flex-direction:column;justify-content:space-between;padding:20px
+}
+.logo{display:flex;align-items:center;gap:10px;margin-bottom:30px}
+.logo img{width:50px;height:50px;border-radius:12px;object-fit:cover}
+.menu a{
+  display:block;text-decoration:none;color:white;font-weight:600;
+  margin-bottom:10px;padding:10px 12px;border-radius:8px;transition:background .25s
+}
+.menu a:hover{background:rgba(255,255,255,0.2)}
+.logout{text-align:center;margin-top:20px}
+.logout button{
+  width:100%;padding:10px;background:white;color:var(--primary);
+  border:0;border-radius:8px;font-weight:700;cursor:pointer
+}
+main{flex:1;padding:30px}
+h1{font-size:24px;margin-bottom:20px}
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:20px;margin-bottom:20px
+}
+.notification{
+  border-bottom:1px solid #e6eef3;
+  padding:10px 0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.notification:last-child{border:none}
+.notification p{margin:0;color:#333}
+.notification small{color:var(--muted);font-size:13px}
+button{
+  padding:6px 10px;
+  background:var(--primary);
+  color:white;
+  border:0;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+  font-size:13px;
+}
+button:hover{background:#087a99}
+footer{text-align:center;margin-top:20px;font-size:13px;color:var(--muted)}
+@media(max-width:760px){
+  body{flex-direction:column}
+  .sidebar{width:100%;flex-direction:row;align-items:center;justify-content:space-between}
+  .menu{display:flex;gap:10px;flex-wrap:wrap}
+  .logout{margin-top:0}
+}
+</style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div>
+      <div class="logo"><img src="omni.jpeg" alt="Logo"><strong>OmniCortex</strong></div>
+      <nav class="menu">
+        <a href="dashboard.html">🏠 Início</a>
+        <a href="pacientes.html">👥 Pacientes</a>
+        <a href="consultas.html">📅 Consultas</a>
+        <a href="prontuarios.html">🦷 Prontuários</a>
+        <a href="relatorios.html">📈 Relatórios</a>
+        <a href="profissionais.html">👨‍⚕️ Profissionais</a>
+        <a href="pagamentos.html">💳 Pagamentos</a>
+        <a href="notificacoes.html">🔔 Notificações</a>
+      </nav>
+    </div>
+    <div class="logout"><button onclick="sair()">Sair</button></div>
+  </aside>
+
+  <main>
+    <h1>Notificações</h1>
+
+    <section class="card" id="notificacoes">
+      <div class="notification">
+        <div>
+          <p>📅 Consulta de <strong>Ana Pereira</strong> amanhã às 14h.</p>
+          <small>Enviado há 2 horas</small>
+        </div>
+        <button onclick="remover(this)">OK</button>
+      </div>
+      <div class="notification">
+        <div>
+          <p>💳 Pagamento pendente de <strong>Marcos Silva</strong>.</p>
+          <small>Há 1 dia</small>
+        </div>
+        <button onclick="remover(this)">OK</button>
+      </div>
+      <div class="notification">
+        <div>
+          <p>🦷 Revisão de equipamentos agendada para sexta-feira.</p>
+          <small>Há 3 dias</small>
+        </div>
+        <button onclick="remover(this)">OK</button>
+      </div>
+    </section>
+
+    <footer>© 2025 OmniCortex — Sistema Odontológico</footer>
+  </main>
+
+  <script>
+    function remover(btn){
+      const item = btn.closest('.notification');
+      item.style.opacity = '0';
+      setTimeout(()=> item.remove(), 300);
+    }
+    function sair(){
+      alert("Você saiu do sistema.");
+      window.location.href="login.html";
+    }
+  </script>
+</body>
+</html>

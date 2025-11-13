@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Profissionais • OmniCortex</title>
+<style>
+:root{--bg:#f6fbff;--card:#ffffff;--primary:#0a8fb3;--accent:#6bd4d8;--muted:#6b7280;--radius:14px;--shadow:0 8px 30px rgba(8,20,30,0.08);--ff-sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--ff-sans);background:linear-gradient(180deg,var(--bg),#eaf6fb 60%);color:#0f1724;display:flex;min-height:100vh}
+.sidebar{width:240px;background:var(--primary);color:white;display:flex;flex-direction:column;justify-content:space-between;padding:20px}
+.logo{display:flex;align-items:center;gap:10px;margin-bottom:30px}
+.logo img{width:50px;height:50px;border-radius:12px;object-fit:cover;box-shadow:0 4px 10px rgba(0,0,0,0.15)}
+.menu a{display:block;text-decoration:none;color:white;font-weight:600;margin-bottom:10px;padding:10px 12px;border-radius:8px;transition:background .25s}
+.menu a:hover{background:rgba(255,255,255,0.2)}
+.logout{text-align:center;margin-top:20px}
+.logout button{width:100%;padding:10px;background:white;color:var(--primary);border:0;border-radius:8px;font-weight:700;cursor:pointer}
+main{flex:1;padding:30px}
+h1{font-size:24px;margin-bottom:20px}
+.form-card,.table-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin-bottom:20px}
+form{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+input,select{padding:10px;border:1px solid #dce4ea;border-radius:8px;font-size:14px;width:100%}
+button{padding:10px;border:0;border-radius:8px;background:var(--primary);color:white;font-weight:700;cursor:pointer}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+th,td{padding:10px;text-align:left;border-bottom:1px solid #e6eef3}
+th{background:#f9fcfd;color:var(--primary)}
+footer{text-align:center;margin-top:20px;font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div>
+      <div class="logo"><img src="omni.jpeg"><strong>OmniCortex</strong></div>
+      <nav class="menu">
+        <a href="dashboard.html">🏠 Início</a><a href="pacientes.html">👥 Pacientes</a>
+        <a href="consultas.html">📅 Consultas</a><a href="prontuarios.html">🦷 Prontuários</a>
+        <a href="relatorios.html">📈 Relatórios</a><a href="profissionais.html">👨‍⚕️ Profissionais</a>
+        <a href="pagamentos.html">💳 Pagamentos</a><a href="notificacoes.html">🔔 Notificações</a>
+      </nav>
+    </div>
+    <div class="logout"><button onclick="sair()">Sair</button></div>
+  </aside>
+
+  <main>
+    <h1>Profissionais</h1>
+
+    <section class="form-card">
+      <h3>Cadastrar novo profissional</h3>
+      <form id="formProf">
+        <input type="text" placeholder="Nome completo" required>
+        <input type="text" placeholder="Especialidade" required>
+        <input type="email" placeholder="E-mail" required>
+        <input type="tel" placeholder="Telefone" required>
+        <button type="submit">Cadastrar</button>
+      </form>
+    </section>
+
+    <section class="table-card">
+      <h3>Equipe Cadastrada</h3>
+      <table id="tabelaProf">
+        <thead><tr><th>Nome</th><th>Especialidade</th><th>E-mail</th><th>Telefone</th></tr></thead>
+        <tbody><tr><td>Dr. Kauan Marques</td><td>Implantodontia</td><td>kauan@omni.com</td><td>(11) 90000-0000</td></tr></tbody>
+      </table>
+    </section>
+
+    <footer>© 2025 OmniCortex — Sistema Odontológico</footer>
+  </main>
+
+<script>
+const f=document.getElementById("formProf"),t=document.querySelector("#tabelaProf tbody");
+f.addEventListener("submit",e=>{
+  e.preventDefault();
+  const d=Array.from(f.querySelectorAll("input")).map(i=>i.value.trim());
+  if(d.some(v=>!v))return alert("Preencha todos os campos!");
+  const l=document.createElement("tr");
+  l.innerHTML=`<td>${d[0]}</td><td>${d[1]}</td><td>${d[2]}</td><td>${d[3]}</td>`;
+  t.appendChild(l);f.reset();alert("Profissional cadastrado!");
+});
+function sair(){alert("Você saiu do sistema.");window.location.href="login.html";}
+</script>
+</body>
+</html>

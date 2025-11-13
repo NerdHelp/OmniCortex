@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pacientes • OmniCortex</title>
+  <style>
+    :root{
+      --bg:#f6fbff;
+      --card:#ffffff;
+      --primary:#0a8fb3;
+      --accent:#6bd4d8;
+      --muted:#6b7280;
+      --radius:14px;
+      --shadow:0 8px 30px rgba(8,20,30,0.08);
+      --ff-sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:var(--ff-sans);
+      background:linear-gradient(180deg,var(--bg),#eaf6fb 60%);
+      color:#0f1724;
+      display:flex;
+      min-height:100vh;
+    }
+
+    /* Sidebar */
+    .sidebar{
+      width:240px;
+      background:var(--primary);
+      color:white;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      padding:20px;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:30px;
+    }
+
+    .logo img{
+      width:50px;height:50px;border-radius:12px;object-fit:cover;
+      box-shadow:0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .menu a{
+      display:block;
+      text-decoration:none;
+      color:white;
+      font-weight:600;
+      margin-bottom:10px;
+      padding:10px 12px;
+      border-radius:8px;
+      transition:background .25s;
+    }
+    .menu a:hover{background:rgba(255,255,255,0.2)}
+
+    .logout{text-align:center;margin-top:20px}
+    .logout button{
+      width:100%;
+      padding:10px;
+      background:white;
+      color:var(--primary);
+      border:0;
+      border-radius:8px;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .logout button:hover{background:#eaf6fb}
+
+    /* Main content */
+    main{
+      flex:1;
+      padding:30px;
+    }
+
+    h1{font-size:24px;margin-bottom:20px}
+
+    .form-card, .table-card{
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+      margin-bottom:20px;
+    }
+
+    form{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:10px;
+    }
+
+    input, select{
+      padding:10px;
+      border:1px solid #dce4ea;
+      border-radius:8px;
+      font-size:14px;
+      width:100%;
+    }
+
+    button{
+      padding:10px;
+      border:0;
+      border-radius:8px;
+      background:var(--primary);
+      color:white;
+      font-weight:700;
+      cursor:pointer;
+      transition:background .25s;
+    }
+    button:hover{background:#087a99}
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:10px;
+    }
+
+    th, td{
+      padding:10px;
+      text-align:left;
+      border-bottom:1px solid #e6eef3;
+    }
+
+    th{background:#f9fcfd;color:var(--primary);font-size:14px}
+    td{font-size:14px;color:#333}
+
+    footer{text-align:center;margin-top:20px;font-size:13px;color:var(--muted)}
+
+    @media(max-width:760px){
+      body{flex-direction:column}
+      .sidebar{width:100%;flex-direction:row;align-items:center;justify-content:space-between}
+      .menu{display:flex;gap:10px;flex-wrap:wrap}
+      .logout{margin-top:0}
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div>
+      <div class="logo">
+        <img src="omni.jpeg" alt="Logo OmniCortex">
+        <strong>OmniCortex</strong>
+      </div>
+      <nav class="menu">
+        <a href="dashboard.html">🏠 Início</a>
+        <a href="pacientes.html">👥 Pacientes</a>
+        <a href="consultas.html">📅 Consultas</a>
+        <a href="prontuarios.html">🦷 Prontuários</a>
+        <a href="relatorios.html">📈 Relatórios</a>
+        <a href="profissionais.html">👨‍⚕️ Profissionais</a>
+        <a href="pagamentos.html">💳 Pagamentos</a>
+        <a href="notificacoes.html">🔔 Notificações</a>
+      </nav>
+    </div>
+    <div class="logout">
+      <button onclick="sair()">Sair</button>
+    </div>
+  </aside>
+
+  <main>
+    <h1>Pacientes</h1>
+
+    <section class="form-card">
+      <h3>Cadastrar novo paciente</h3>
+      <form id="formPaciente">
+        <input type="text" placeholder="Nome completo" required>
+        <input type="text" placeholder="CPF" required>
+        <input type="text" placeholder="Telefone" required>
+        <input type="email" placeholder="E-mail" required>
+        <select>
+          <option value="">Sexo</option>
+          <option>Masculino</option>
+          <option>Feminino</option>
+        </select>
+        <input type="date" placeholder="Data de nascimento">
+        <button type="submit">Cadastrar</button>
+      </form>
+    </section>
+
+    <section class="table-card">
+      <h3>Pacientes cadastrados</h3>
+      <table id="tabelaPacientes">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Telefone</th>
+            <th>E-mail</th>
+            <th>Sexo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Ana Pereira</td><td>123.456.789-00</td><td>(11) 98888-0000</td><td>ana@email.com</td><td>Feminino</td></tr>
+          <tr><td>Marcos Silva</td><td>987.654.321-00</td><td>(11) 97777-1111</td><td>marcos@email.com</td><td>Masculino</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer>© 2025 OmniCortex — Sistema Odontológico</footer>
+  </main>
+
+  <script>
+    const form = document.getElementById("formPaciente");
+    const tabela = document.getElementById("tabelaPacientes").querySelector("tbody");
+
+    form.addEventListener("submit", e=>{
+      e.preventDefault();
+      const dados = Array.from(form.querySelectorAll("input, select")).map(i=>i.value.trim());
+      if(dados.some(v=>!v)) return alert("Preencha todos os campos!");
+
+      const novaLinha = document.createElement("tr");
+      novaLinha.innerHTML = `<td>${dados[0]}</td><td>${dados[1]}</td><td>${dados[2]}</td><td>${dados[3]}</td><td>${dados[4]}</td>`;
+      tabela.appendChild(novaLinha);
+      form.reset();
+      alert("Paciente cadastrado com sucesso!");
+    });
+
+    function sair(){
+      alert("Você saiu do sistema.");
+      window.location.href="login.html";
+    }
+  </script>
+</body>
+</html>
